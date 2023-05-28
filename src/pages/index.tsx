@@ -1,17 +1,17 @@
-// create a pages componente that uses reac-router-dom v6
-
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import SignIn from './SignIn'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import SignIn from "./SignIn";
+import Home from "./Home";
 
 function Pages() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default Pages
+export default Pages;

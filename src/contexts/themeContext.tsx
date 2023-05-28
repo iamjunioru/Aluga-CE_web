@@ -13,11 +13,11 @@ interface MainProps {
   children: ReactNode | ReactNode[];
 }
 
-const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
+export const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 // eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => useContext(ThemeContext);
 export const CustomThemeProvider = ({ children }: MainProps) => {
-  const [theme, setTheme] = usePersistedState<DefaultTheme>("theme", darkTheme);
+  const [theme, setTheme] = usePersistedState<DefaultTheme>("theme", lightTheme);
 
   const toggleTheme = useCallback(() => {
     setTheme(theme.title === "dark" ? lightTheme : darkTheme);

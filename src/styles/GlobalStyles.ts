@@ -4,7 +4,7 @@ export const GlobalStyles = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "nunito", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 :root {
   --background: ${(props) => props.theme.colors.background};

@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { SignInWrapper, Input, Button, Form, SignInContent } from "./styled";
+import Loader from "../../components/Loader";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {UserService} from "../../services/UserService";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/authContext";
+import { UserService } from "../../services/UserService";
+import { toast } from "react-toastify";
 
 interface Inputs {
   email: string;
@@ -11,8 +15,10 @@ interface Inputs {
 }
 
 function SignIn() {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-
+  const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const userContext = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,11 +27,47 @@ function SignIn() {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setLoading(true);
     if (isLogin) {
-      UserService.signIn(data.email, data.password);
+      const { email, password } = data;
+      UserService.signIn(email, password)
+        .then((response) => {
+          userContext.setUser(response.data.user);
+          localStorage.setItem("token", response.data.token);
+          toast.success(
+            response.data.message || "Login realizado com sucesso"
+          );
+          navigate("/home");
+        })
+        .catch((err) => {
+          const error = err.response.data;
+          console.log(error);
+          toast.error(error.errors.default || "Email ou senha inválidos");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
       return;
     }
-    UserService.signUp(data.email, data.password, data.name, data.phone_number);
+    const { email, password, name, phone_number } = data;
+    UserService.signUp(email, password, name, phone_number)
+      .then((response) => {
+        userContext.setUser(response.data.user);
+        localStorage.setItem("token", response.data.token);
+        toast.success(
+          response.data.message || "Cadastro realizado com sucesso"
+        );
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(
+          error.response?.data?.message || "Email ou senha inválidos"
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const ValidateEmail = (error: any) => {
@@ -50,7 +92,9 @@ function SignIn() {
     <SignInWrapper>
       <SignInContent>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          {isLogin ? (
+          {isLoading ? (
+            <Loader />
+          ) : isLogin ? (
             <>
               <h1>Sign In</h1>
               <Input
@@ -79,7 +123,6 @@ function SignIn() {
           ) : (
             <>
               <h1>Sign Up</h1>
-              {/* inputs type name, email, phone_number e password*/}
               <Input
                 type="text"
                 placeholder="Name"
