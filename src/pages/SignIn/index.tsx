@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { SignInWrapper, Input, Button, Form, SignInContent } from "./styled";
+import { SignInWrapper, Button, Form, SignInContent } from "./styled";
 import Loader from "../../components/Loader";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/authContext";
 import { UserService } from "../../services/UserService";
 import { toast } from "react-toastify";
 
-interface Inputs {
+export interface Inputs {
   email: string;
   password: string;
   name: string;
@@ -33,7 +33,7 @@ function SignIn() {
       UserService.signIn(email, password)
         .then((response) => {
           userContext.setUser(response.data.user);
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("token", response.data.accessToken);
           toast.success(
             response.data.message || "Login realizado com sucesso"
           );
@@ -42,7 +42,7 @@ function SignIn() {
         .catch((err) => {
           const error = err.response.data;
           console.log(error);
-          toast.error(error.errors.default || "Email ou senha inválidos");
+          toast.error(error.errors.default || "Erro ao realizar login");
         })
         .finally(() => {
           setLoading(false);
@@ -53,7 +53,7 @@ function SignIn() {
     UserService.signUp(email, password, name, phone_number)
       .then((response) => {
         userContext.setUser(response.data.user);
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.accessToken);
         toast.success(
           response.data.message || "Cadastro realizado com sucesso"
         );
@@ -96,9 +96,11 @@ function SignIn() {
             <Loader />
           ) : isLogin ? (
             <>
-              <h1>Sign In</h1>
-              <Input
+              <h1>Bem vindo de volta!</h1>
+              <input
                 type="email"
+                aria-label="email"
+                title="email"
                 placeholder="Email"
                 {...register("email", {
                   required: true,
@@ -106,31 +108,41 @@ function SignIn() {
                   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                 })}
               />
-              {errors.email && <span>{ValidateEmail(errors.email)}</span>}
-              <Input
+              {errors.email && <span id="span-error-message">{ValidateEmail(errors.email)}</span>}
+              <input
                 type="password"
-                placeholder="Password"
+                aria-label="senha"
+                title="senha"
+                placeholder="Senha"
                 {...register("password", { required: true })}
               />
-              {errors.password && <span>Campo obrigatório</span>}
+              {errors.password && <span id="span-error-message">Campo obrigatório</span>}
 
               <Button type="submit">Sign In</Button>
-              <p>
-                Don't have an account?{" "}
-                <span onClick={toggleLogin}>Sign Up</span>
+              <p className="dont-have-account">
+                Não tem uma conta?{" "}
+                <span onClick={toggleLogin}>
+                  <strong>Cadastre-se</strong>
+                </span>
               </p>
             </>
           ) : (
             <>
-              <h1>Sign Up</h1>
-              <Input
+              <h1>
+                Cadastre-se
+              </h1>
+              <input
                 type="text"
-                placeholder="Name"
+                aria-label="name"
+                title="nome de usuário"
+                placeholder="Nome de usuário"
                 {...register("name", { required: true })}
               />
-              {errors.name && <span>Campo obrigatório</span>}
-              <Input
+              {errors.name && <span id="span-error-message">Campo obrigatório</span>}
+              <input
                 type="email"
+                aria-label="email"
+                title="email"
                 placeholder="Email"
                 {...register("email", {
                   required: true,
@@ -138,24 +150,32 @@ function SignIn() {
                   pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                 })}
               />
-              {errors.email && <span>{ValidateEmail(errors.email)}</span>}
-              <Input
+              {errors.email && <span id="span-error-message">{ValidateEmail(errors.email)}</span>}
+              <input
                 type="text"
-                placeholder="Phone Number"
+                aria-label="número de telefone"
+                title="número de telefone"
+                placeholder="(88) 99999-9999"
                 {...register("phone_number", { required: true })}
               />
-              {errors.phone_number && <span>Campo obrigatório</span>}
-              <Input
+              {errors.phone_number && <span id="span-error-message">Campo obrigatório</span>}
+              <input
                 type="password"
-                placeholder="Password"
+                aria-label="senha"
+                title="senha"
+                placeholder="Senha"
                 {...register("password", { required: true })}
               />
 
-              {errors.password && <span>Campo obrigatório</span>}
+              {errors.password && <span id="span-error-message">Campo obrigatório</span>}
               <Button type="submit">Sign Up</Button>
-              <p>
-                Already have an account?{" "}
-                <span onClick={toggleLogin}>Sign In</span>
+              <p
+                className="dont-have-account"
+              >
+                Já possui uma conta?{" "}
+                <span onClick={toggleLogin}>
+                  <strong>Entrar</strong>
+                </span>
               </p>
             </>
           )}

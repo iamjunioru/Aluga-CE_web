@@ -15,11 +15,12 @@ import { MdOutlineWbSunny, MdOutlineDarkMode } from "react-icons/md";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../contexts/themeContext";
+import CustomizedDialogs from "../Modal";
+import UserFormInfo from "../UserFormInfo";
 
 function Header() {
   const theme = useContext(ThemeContext);
   const userContext = useContext(AuthContext);
-  console.log("userContext", userContext.user);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -38,7 +39,6 @@ function Header() {
             fill="currentColor"
             stroke-width="0"
             viewBox="0 0 448 512"
-            color="#e91e63"
             height="40"
             width="40"
             xmlns="http://www.w3.org/2000/svg"
@@ -49,13 +49,22 @@ function Header() {
         </div>
         <HeaderUser>
           <Box
-            sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textAlign: "center",
+            }}
           >
             <Typography
               sx={{ minWidth: 100 }}
-              style={{ cursor: "pointer", color: "#e91e63" }}
+              style={{ cursor: "pointer", color: "var(--primary)" }}
             >
-              Tem um imóvel para alugar?
+              <CustomizedDialogs
+                modalTitle="Entre em contato conosco"
+                modalButton="Tem um imóvel para alugar?"
+              >
+                Funcionalidade em desenvolvimento
+              </CustomizedDialogs>
             </Typography>
             <Tooltip title="Menu">
               <IconButton
@@ -67,9 +76,11 @@ function Header() {
                 aria-expanded={open ? "true" : undefined}
               >
                 <Avatar sx={{ width: 32, height: 32 }}>
-                  {userContext.user?.name
-                    ? userContext.user?.name[0].toUpperCase()
-                    : ""}
+                  {userContext.user?.name ? (
+                    userContext.user?.name[0].toUpperCase()
+                  ) : (
+                    <Avatar sx={{ width: 32, height: 32 }} />
+                  )}
                 </Avatar>
               </IconButton>
             </Tooltip>
@@ -79,7 +90,6 @@ function Header() {
             id="account-menu"
             open={open}
             onClose={handleClose}
-            onClick={handleClose}
             PaperProps={{
               elevation: 0,
               sx: {
@@ -110,8 +120,14 @@ function Header() {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
             {userContext?.user && (
-              <MenuItem onClick={handleClose}>
-                <Avatar /> Minhas informações
+              <MenuItem>
+                <Avatar />
+                <CustomizedDialogs
+                  modalTitle="Minhas informações"
+                  modalButton="Minhas informações"
+                >
+                  <UserFormInfo />
+                </CustomizedDialogs>
               </MenuItem>
             )}
             {userContext.user?.has_property && (

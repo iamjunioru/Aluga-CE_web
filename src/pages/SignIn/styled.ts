@@ -11,18 +11,17 @@ export const SignInWrapper = styled.div`
 `;
 
 export const SignInContent = styled.div`
-  background-color: aliceblue;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  background-color: var(--background-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 640px;
   max-width: 40rem;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
-  justify-items: center;
-  justify-content: center;
+  box-shadow: var(--box-shadow);
 `;
 
 export const Form = styled.form`
@@ -31,53 +30,41 @@ export const Form = styled.form`
   max-width: 1020px;
   max-height: 40rem;
   height: 640px;
-  background-color: aliceblue;
-  box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
+  box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-`;
 
-export const Input = styled.input`
-  width: 100%;
-  max-width: 400px;
-  height: 2.5rem;
-  padding: 0 1rem;
-  border-radius: 0.25rem;
-  border: 1px solid #d7d7d7;
-  background: #e7e9ee;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #29292e;
+  h1 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text);
+  }
 
-  &::placeholder {
-    color: #8d8d99;
+  p.dont-have-account {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--gray-light);
+    text-align: center;
+
+    span {
+      color: var(--primary);
+      cursor: pointer;
+    }
   }
 `;
 
 export const Button = styled.button`
   width: 100%;
   max-width: 400px;
-  height: 2.5rem;
-  padding: 0 1rem;
-  border-radius: 0.25rem;
+  height: var(--input-button-height);
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
   border: 0;
-  background: #835afd;
-  color: #fff;
+  background: var(--primary);
+  color: var(--white);
   font-size: 1rem;
   font-weight: 500;
-
-  transition: filter 0.2s;
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-
-  &:disabled {
-    background: #e7e9ee;
-    color: #29292e;
-    cursor: not-allowed;
-  }
 `;

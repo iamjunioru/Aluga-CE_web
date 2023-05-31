@@ -4,10 +4,11 @@ export const HeaderWrapper = styled.div`
   width: 100%;
   min-height: 70px;
   display: flex;
+  justify-content: center;
   flex-direction: row;
   align-items: center;
   padding: 0 24px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--gray-light);
 `;
 
 export const HeaderContent = styled.div`
@@ -15,6 +16,7 @@ export const HeaderContent = styled.div`
   align-items: center;
   min-height: 90px;
   padding: 0 32px;
+  max-width: var(--page-max-width);
   justify-content: space-between;
   width: 100%;
   align-items: center;
@@ -25,7 +27,7 @@ export const HeaderContent = styled.div`
     align-items: center;
 
     svg {
-      color: rgb(233, 30, 99);
+      color: var(--secondary);
     }
 
     h3 {
@@ -36,16 +38,16 @@ export const HeaderContent = styled.div`
       letter-spacing: 0.00714em;
       text-transform: none;
       text-transform: capitalize;
-      color: #e91e63;
+      color: var(--primary);
       margin-left: 8px;
-      font-size: 20px;
+      font-size: 1.5rem;
       font-weight: 700;
     }
   }
 
   button.become-host {
-    background-color: #e91e63;
-    color: #fff;
+    background-color: var(--primary);
+    color: var(--white);
     border-radius: 4px;
     padding: 8px 16px;
     font-size: 14px;
@@ -58,24 +60,6 @@ export const HeaderContent = styled.div`
     outline: none;
     transition: all 0.2s ease-in-out;
 
-    &:hover {
-      background-color: #d81b60;
-    }
-
-    &:active {
-      background-color: #c2185b;
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 0.2rem rgba(233, 30, 99, 0.5);
-    }
-
-    &:disabled {
-      background-color: #e91e63;
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
     span {
       display: flex;
       align-items: center;
@@ -85,5 +69,16 @@ export const HeaderContent = styled.div`
 `;
 
 export const HeaderUser = styled.div`
- 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  p {
+    margin-right: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    color: var(--primary);
+  }
 `;

@@ -1,6 +1,7 @@
 import { createContext, useState, ReactNode } from "react";
 
 type AuthUser = {
+  id: string;
   email: string;
   has_property: boolean;
   name: string;
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }: AuthContextProviderProps) => {
 
   const signOut = () => {
     setUser({
+      id: "",
       email: "",
       has_property: false,
       name: "",
