@@ -33,7 +33,8 @@ function Header() {
   return (
     <HeaderWrapper>
       <HeaderContent>
-        <div className="header-logo"
+        <div
+          className="header-logo"
           onClick={() => {
             navigate("/");
           }}
@@ -123,7 +124,7 @@ function Header() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            {userContext?.user && (
+            {userContext?.user && Object.keys(userContext?.user).length > 0 && (
               <MenuItem>
                 <Avatar />
                 <CustomizedDialogs
@@ -164,7 +165,7 @@ function Header() {
               )}
             </MenuItem>
             <Divider />
-            {userContext?.user ? (
+            {userContext?.user && Object.keys(userContext?.user).length > 0 ? (
               <MenuItem
                 onClick={() => {
                   userContext.signOut();

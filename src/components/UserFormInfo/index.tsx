@@ -44,7 +44,7 @@ function UserFormInfo() {
 
   useEffect(() => {
     setLoading(true);
-    if (userContext?.user) {
+    if (userContext?.user && Object.keys(userContext?.user).length > 0) {
       UserService.getUser(userContext?.user?.id)
         .then((response) => {
           setLoading(false);
