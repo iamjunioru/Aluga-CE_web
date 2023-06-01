@@ -54,7 +54,7 @@ const locationsTab = [
 const FiltersTab = () => {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue: number) => {
     setValue(newValue);
   };
 
@@ -77,7 +77,12 @@ const FiltersTab = () => {
       >
         <Tabs
           value={value}
-          onChange={handleChange}
+          onChange={
+            handleChange as unknown as (
+              event: React.SyntheticEvent,
+              value: number
+            ) => void
+          }
           variant="scrollable"
           scrollButtons
           sx={{

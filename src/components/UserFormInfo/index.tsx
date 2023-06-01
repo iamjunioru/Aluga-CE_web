@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Inputs } from "../../pages/SignIn";
@@ -14,7 +14,6 @@ function UserFormInfo() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     setValue,
   } = useForm<Inputs>();
 

@@ -9,7 +9,7 @@ type AuthUser = {
 };
 
 export type AuthContextType = {
-  user: any | null;
+  user: AuthUser;
   setUser: (user: AuthUser) => void;
   signOut: () => void;
 };
@@ -21,7 +21,7 @@ type AuthContextProviderProps = {
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: AuthContextProviderProps) => {
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [user, setUser] = useState<AuthUser>({} as AuthUser);
 
   const signOut = () => {
     setUser({

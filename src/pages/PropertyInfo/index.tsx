@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+// import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import {
   PropertyInfoWrapper,
@@ -37,7 +37,7 @@ function PropertyInfo() {
   const [activeStep, setActiveStep] = useState(0);
 
   const maxSteps = images.length;
-  const params = useParams();
+  // const params = useParams();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
