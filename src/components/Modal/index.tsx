@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import { AiOutlineClose } from "react-icons/ai";
+import { ListItemIcon, MenuItem } from "@mui/material";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -50,13 +51,13 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 interface CustomizedDialogsProps {
   children: React.ReactNode;
   modalTitle: string;
-  modalButton: string;
+  modalText: string;
 }
 
 export default function CustomizedDialogs({
   children,
   modalTitle,
-  modalButton,
+  modalText,
 }: CustomizedDialogsProps) {
   const [open, setOpen] = React.useState(false);
 
@@ -74,9 +75,18 @@ export default function CustomizedDialogs({
         minWidth: "100px",
       }}
     >
-      <Button variant="outlined" onClick={handleClickOpen}>
-        {modalButton}
-      </Button>
+      <p
+        onClick={handleClickOpen}
+        style={{
+          cursor: "pointer",
+          color: "var(--primary)",
+          fontSize: "clamp(0.8rem, 1vw, 1rem)",
+          margin: 0,
+          fontWeight: 500,
+        }}
+      >
+        {modalText}
+      </p>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

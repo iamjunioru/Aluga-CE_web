@@ -8,6 +8,7 @@ export const SignInWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 320px;
 `;
 
 export const SignInContent = styled.div`

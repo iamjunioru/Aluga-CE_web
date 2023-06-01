@@ -2,20 +2,25 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  min-height: 70px;
+  min-height: var(--header-height);
   display: flex;
   justify-content: center;
   flex-direction: row;
   align-items: center;
-  padding: 0 24px;
+  background-color: var(--background);
   border-bottom: 1px solid var(--gray-light);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
 `;
 
 export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
-  min-height: 90px;
-  padding: 0 32px;
+  min-height: var(--header-height);
+  padding: 0 var(--padding-page);
   max-width: var(--page-max-width);
   justify-content: space-between;
   width: 100%;
@@ -25,9 +30,11 @@ export const HeaderContent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     svg {
       color: var(--secondary);
+      width: clamp(2rem, 5vw, 3rem);
     }
 
     h3 {
@@ -40,8 +47,14 @@ export const HeaderContent = styled.div`
       text-transform: capitalize;
       color: var(--primary);
       margin-left: 8px;
-      font-size: 1.5rem;
+      font-size: clamp(1rem, 5vw, 2rem);
       font-weight: 700;
+    }
+
+    @media (max-width: 500px) {
+      h3 {
+        display: none;
+      }
     }
   }
 

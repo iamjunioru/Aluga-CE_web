@@ -33,7 +33,11 @@ function Header() {
   return (
     <HeaderWrapper>
       <HeaderContent>
-        <div className="header-logo">
+        <div className="header-logo"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -61,7 +65,7 @@ function Header() {
             >
               <CustomizedDialogs
                 modalTitle="Entre em contato conosco"
-                modalButton="Tem um imóvel para alugar?"
+                modalText="Tem um imóvel para alugar?"
               >
                 Funcionalidade em desenvolvimento
               </CustomizedDialogs>
@@ -124,7 +128,7 @@ function Header() {
                 <Avatar />
                 <CustomizedDialogs
                   modalTitle="Minhas informações"
-                  modalButton="Minhas informações"
+                  modalText="Minhas informações"
                 >
                   <UserFormInfo />
                 </CustomizedDialogs>

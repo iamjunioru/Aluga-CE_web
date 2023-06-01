@@ -18,6 +18,7 @@ export const GlobalStyles = createGlobalStyle`
   --gray-light: #828282;
   --white: #ffffff;
   --black: #000000;
+  --star-rating: #f2c94c;
 
   /* font-size */
   --font-size-sm: 0.875rem;
@@ -39,7 +40,9 @@ export const GlobalStyles = createGlobalStyle`
   --input-color: #29292e;
 
   /* spacing */
-  --page-max-width: 1400px;
+  --page-max-width: 1200px;
+  --header-height: 90px;
+  --padding-page: clamp(1rem, 5vw, 3.5rem);
 
   /* border-radius */
   --border-radius: 0.5rem;
@@ -53,6 +56,11 @@ export const GlobalStyles = createGlobalStyle`
 html {
   background: var(--background);
   scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text);
+  width: 100%;
 }
 
 h1 {
