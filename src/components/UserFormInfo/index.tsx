@@ -48,21 +48,18 @@ function UserFormInfo() {
       UserService.getUser(userContext?.user?.id)
         .then((response) => {
           setLoading(false);
-          setValue("email", response.data.user.email);
-          setValue("name", response.data.user.name);
-          setValue("phone_number", response.data.user.phone_number);
-
-          console.log(response.message);
           toast.success(
             response.message || "Dados do usuário carregados com sucesso"
           );
         })
         .catch((error) => {
-          console.log(error.response.data.errors.default);
+          if (error) {
+            console.log(error.response.data.errors.default);
           toast.error(
             error.response.data.errors.default ||
               "Não foi possível carregar os dados do usuário"
           );
+          }
         })
         .finally(() => {
           setLoading(false);
@@ -84,6 +81,7 @@ function UserFormInfo() {
               id="email"
               placeholder="E-mail"
               {...register("email", { required: true })}
+              defaultValue={userContext?.user?.email}
             />
             {errors.password && (
               <span id="span-error-message">Campo obrigatório</span>
@@ -97,6 +95,7 @@ function UserFormInfo() {
               id="name"
               placeholder="Nome"
               {...register("name", { required: true })}
+              defaultValue={userContext?.user?.name}
             />
             {errors.password && (
               <span id="span-error-message">Campo obrigatório</span>
@@ -110,6 +109,7 @@ function UserFormInfo() {
               id="phone_number"
               placeholder="Telefone"
               {...register("phone_number", { required: true })}
+              defaultValue={userContext?.user?.phone_number}
             />
             {errors.password && (
               <span id="span-error-message">Campo obrigatório</span>

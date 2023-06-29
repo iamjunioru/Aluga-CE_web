@@ -37,12 +37,14 @@ function SignIn() {
           toast.success(
             response.data.message || "Login realizado com sucesso"
           );
-          navigate("/home");
+          navigate("/");
         })
         .catch((err) => {
-          const error = err.response.data;
-          console.log(error);
-          toast.error(error.errors.default || "Erro ao realizar login");
+          if (err) {
+            toast.error(
+              err.response?.data?.message || "Email ou senha inválidos"
+            );
+          }
         })
         .finally(() => {
           setLoading(false);
@@ -57,7 +59,7 @@ function SignIn() {
         toast.success(
           response.data.message || "Cadastro realizado com sucesso"
         );
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
