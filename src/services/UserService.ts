@@ -43,4 +43,8 @@ export const UserService = {
     });
     return data;
   },
+  getSpecificUser: async (id: string) => {
+    const { data } = await http.get(`/users/${id}`);
+    return data;
+  },
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import {
@@ -13,6 +13,11 @@ import CommentSection from "../../components/CommentsSection";
 import { Box, Button, MobileStepper } from "@mui/material";
 import SwipeableViews from "react-swipeable-views";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { PropertyService } from "../../services/PropertyServices";
+import { Property } from "../../models/Property";
+import { useParams } from "react-router-dom";
+import { User } from "../../models/User";
+import { UserService } from "../../services/UserService";
 
 const images = [
   {
@@ -34,10 +39,70 @@ const images = [
 ];
 
 function PropertyInfo() {
+  const [property, setProperty] = useState({} as Property);
+  const [userInfo, setUserInfo] = useState({} as User);
+  const [showPropertyInfo, setShowPropertyInfo] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
 
+  const params = useParams();
+
+  const id = params.id as string;
+
+  useEffect(() => {
+    setLoading(true);
+    PropertyService.getProperty(id).then((response) => {
+      setProperty(
+        {
+          ...response.data,
+          images: [
+            {
+              id: "4503-ad0c-4403854decb1",
+              url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&h=250&q=60",
+            },
+            {
+              id: "4503-ad0c-4403854de434",
+              url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=400&h=250&q=60",
+            },
+            {
+              id: "4503-ad0c-4403854d3451",
+              url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=400&h=250&q=80",
+            },
+            {
+              id: "1234-ad0c-4403854decb1",
+              url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=400&h=250&q=60",
+            },
+          ],
+        }
+      );
+    }).catch((error) => {
+      console.log(error);
+    }).finally(() => {
+      setLoading(false);
+    });
+    return () => {
+      setProperty({} as Property);
+    };
+  }, [id]);
+
+  useEffect(() => {
+    setLoading(true);
+    UserService.getSpecificUser(property.user_Id).then((response) => {
+      setUserInfo(response.data);
+      setShowPropertyInfo(true);
+    }).catch((error) => {
+      console.log(error.response.data.errors.default);
+      setShowPropertyInfo(false);
+    }).finally(() => {
+      setLoading(false);
+    });
+    return () => {
+      setUserInfo({} as User);
+    };
+  }, [property.user_Id]);
+
   const maxSteps = images.length;
-  // const params = useParams();
+
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -169,7 +234,20 @@ function PropertyInfo() {
           </PropertyInfoDescriptionDetails>
         </div>
         <PropertyInfoOwnerContact>
-          Informações do proprietário
+          {showPropertyInfo ? (
+            <div className="property-info__owner">
+              <div className="property-info__owner__name">
+                <h3>{userInfo.name}</h3>
+              </div>
+              <div className="property-info__owner__contact">
+                <h3>Contact</h3>
+              </div>
+            </div>
+          ) : (
+            <div className="property-info__owner">
+              Para mostrar as informações do proprietário, faça login.
+            </div>
+          )}
         </PropertyInfoOwnerContact>
       </PropertyInfoContent>
       <CommentSection />

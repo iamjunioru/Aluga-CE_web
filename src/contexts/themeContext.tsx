@@ -23,8 +23,6 @@ export const CustomThemeProvider = ({ children }: MainProps) => {
     setTheme(theme.title === "dark" ? lightTheme : darkTheme);
   }, [theme, setTheme]);
 
-  console.log("theme", typeof toggleTheme);
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme  }}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
