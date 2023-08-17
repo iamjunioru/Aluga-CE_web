@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 // import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import {
@@ -18,6 +18,8 @@ import { Property } from "../../models/Property";
 import { useParams } from "react-router-dom";
 import { User } from "../../models/User";
 import { UserService } from "../../services/UserService";
+import Loader from "../../components/Loader";
+import { AuthContext } from "../../contexts/authContext";
 
 const images = [
   {
@@ -39,6 +41,7 @@ const images = [
 ];
 
 function PropertyInfo() {
+  const userContext = useContext(AuthContext);
   const [property, setProperty] = useState({} as Property);
   const [userInfo, setUserInfo] = useState({} as User);
   const [showPropertyInfo, setShowPropertyInfo] = useState(false);
@@ -51,58 +54,54 @@ function PropertyInfo() {
 
   useEffect(() => {
     setLoading(true);
-    PropertyService.getProperty(id).then((response) => {
-      setProperty(
-        {
-          ...response.data,
-          images: [
-            {
-              id: "4503-ad0c-4403854decb1",
-              url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&h=250&q=60",
-            },
-            {
-              id: "4503-ad0c-4403854de434",
-              url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=400&h=250&q=60",
-            },
-            {
-              id: "4503-ad0c-4403854d3451",
-              url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=400&h=250&q=80",
-            },
-            {
-              id: "1234-ad0c-4403854decb1",
-              url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=400&h=250&q=60",
-            },
-          ],
-        }
-      );
-    }).catch((error) => {
-      console.log(error);
-    }).finally(() => {
-      setLoading(false);
-    });
-    return () => {
-      setProperty({} as Property);
-    };
+    if (id) {
+      PropertyService.getProperty(id).then((response) => {
+        setProperty(
+          {
+            ...response.data,
+            images: [
+              {
+                id: "4503-ad0c-4403854decb1",
+                url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&h=250&q=60",
+              },
+              {
+                id: "4503-ad0c-4403854de434",
+                url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=400&h=250&q=60",
+              },
+              {
+                id: "4503-ad0c-4403854d3451",
+                url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=400&h=250&q=80",
+              },
+              {
+                id: "1234-ad0c-4403854decb1",
+                url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=400&h=250&q=60",
+              },
+            ],
+          }
+        );
+        setLoading(false);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
   }, [id]);
 
   useEffect(() => {
-    setLoading(true);
-    UserService.getSpecificUser(property.user_Id).then((response) => {
-      setUserInfo(response.data);
-      setShowPropertyInfo(true);
-    }).catch((error) => {
-      console.log(error.response.data.errors.default);
-      setShowPropertyInfo(false);
-    }).finally(() => {
-      setLoading(false);
-    });
-    return () => {
-      setUserInfo({} as User);
-    };
-  }, [property.user_Id]);
+    if (Object.keys(property).length > 0 && userContext.user?.id) {
+      setLoading(true);
+      UserService.getSpecificUser(property.user_Id).then((response) => {
+        setUserInfo(response.data);
+        setShowPropertyInfo(true);
+        setLoading(false);
+      }).catch((error) => {
+        console.log(error.response.data.errors.default);
+        setShowPropertyInfo(false);
+        setLoading(false);
+      })
+    }
+  }, [property, userContext.user?.id]);
 
   const maxSteps = images.length;
-
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -118,139 +117,143 @@ function PropertyInfo() {
   return (
     <PropertyInfoWrapper>
       <Header />
-      <PropertyInfoContent>
-        <div className="property-info">
-          <PropertyInfoHeader>
-            <div className="property-info__texts">
-              <h1>
-                Property InfoProperty InfoProperty InfoProperty InfoProperty
-                InfoProperty InfoProperty InfoProperty InfoProperty InfoProperty
-                Info
-              </h1>
-              <h3>rua tal, pais tal</h3>
-            </div>
-            <div className="property-info__type">
-              <h3>Property Type</h3>
-            </div>
-          </PropertyInfoHeader>
-          <PropertyInfoImages>
-            <Box className="carouselCard">
-              {images.length && (
-                <SwipeableViews
-                  axis={"x"}
-                  index={activeStep}
-                  onChangeIndex={handleStepChange}
-                >
-                  {images.map((image) => {
-                    return (
-                      <div className="image-swipper" key={image.id}>
-                        <Box
-                          component="img"
-                          sx={{
-                            height: "100%",
-                            maxHeight: "100%",
-                            objectFit: "cover",
-                            display: "block",
-                            overflow: "hidden",
-                            width: "100%",
-                            borderRadius: 3,
-                          }}
-                          src={image.url}
-                          alt={image.url}
-                        ></Box>
-                      </div>
-                    );
-                  })}
-                </SwipeableViews>
-              )}
+      {
+        isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <PropertyInfoContent>
+              <div className="property-info">
+                <PropertyInfoHeader>
+                  <div className="property-info__texts">
+                    <h1>
+                      {property.description}
+                    </h1>
+                    <h3>
+                      {property.street_name}, {property.neighborhood}
+                    </h3>
+                  </div>
+                  <div className="property-info__type">
+                    <h3>
+                      {property.type}
+                    </h3>
+                  </div>
+                </PropertyInfoHeader>
+                <PropertyInfoImages>
+                  <Box className="carouselCard">
+                    {images.length && (
+                      <SwipeableViews
+                        axis={"x"}
+                        index={activeStep}
+                        onChangeIndex={handleStepChange}
+                      >
+                        {images.map((image) => {
+                          return (
+                            <div className="image-swipper" key={image.id}>
+                              <Box
+                                component="img"
+                                sx={{
+                                  height: "100%",
+                                  maxHeight: "100%",
+                                  objectFit: "cover",
+                                  display: "block",
+                                  overflow: "hidden",
+                                  width: "100%",
+                                  borderRadius: 3,
+                                }}
+                                src={image.url}
+                                alt={image.url}
+                              ></Box>
+                            </div>
+                          );
+                        })}
+                      </SwipeableViews>
+                    )}
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  width: "100%",
-                }}
-              >
-                <MobileStepper
-                  sx={{ backgroundColor: "rgba(35,35,35,0.2)" }}
-                  steps={maxSteps}
-                  position="static"
-                  variant="dots"
-                  activeStep={activeStep}
-                  nextButton={
-                    <Button
-                      id="next-button"
-                      size="small"
+                    <Box
                       sx={{
-                        color: "#000",
-                        backgroundColor: "#fff",
-                        opacity: 1,
-                        borderRadius: 10,
-                        p: 1,
-                        minWidth: "auto",
+                        position: "absolute",
+                        bottom: 0,
+                        width: "100%",
                       }}
-                      onClick={handleNext}
-                      disabled={activeStep === maxSteps - 1}
                     >
-                      <AiOutlineRight />
-                    </Button>
-                  }
-                  backButton={
-                    <Button
-                      id="back-button"
-                      size="small"
-                      sx={{
-                        color: "#000",
-                        backgroundColor: "#fff",
-                        opacity: 1,
-                        borderRadius: 10,
-                        p: 1,
-                        minWidth: "auto",
-                      }}
-                      onClick={handleBack}
-                      disabled={activeStep === 0}
-                    >
-                      <AiOutlineLeft />
-                    </Button>
-                  }
-                />
-              </Box>
-            </Box>
-          </PropertyInfoImages>
-          <PropertyInfoDescriptionDetails>
-            <div className="property-description">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-              amet eligendi dolor magnam, sequi vero, tempora voluptatibus
-              voluptatem libero delectus, corrupti quaerat! Ab, quia iure sunt
-              porro magnam ipsa atque. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Amet minima alias facilis officiis repellat,
-              laborum odio quam ad velit omnis maiores qui enim laudantium illum
-              debitis molestiae iusto excepturi adipisci! Lorem, ipsum dolor sit
-              amet consectetur adipisicing elit. Illo quibusdam, recusandae,
-              perferendis ratione iusto similique libero voluptates et, voluptas
-              obcaecati deleniti itaque pariatur laborum fuga officia expedita
-              harum beatae voluptatibus.
-            </div>
-          </PropertyInfoDescriptionDetails>
-        </div>
-        <PropertyInfoOwnerContact>
-          {showPropertyInfo ? (
-            <div className="property-info__owner">
-              <div className="property-info__owner__name">
-                <h3>{userInfo.name}</h3>
+                      <MobileStepper
+                        sx={{ backgroundColor: "rgba(35,35,35,0.2)" }}
+                        steps={maxSteps}
+                        position="static"
+                        variant="dots"
+                        activeStep={activeStep}
+                        nextButton={
+                          <Button
+                            id="next-button"
+                            size="small"
+                            sx={{
+                              color: "#000",
+                              backgroundColor: "#fff",
+                              opacity: 1,
+                              borderRadius: 10,
+                              p: 1,
+                              minWidth: "auto",
+                            }}
+                            onClick={handleNext}
+                            disabled={activeStep === maxSteps - 1}
+                          >
+                            <AiOutlineRight />
+                          </Button>
+                        }
+                        backButton={
+                          <Button
+                            id="back-button"
+                            size="small"
+                            sx={{
+                              color: "#000",
+                              backgroundColor: "#fff",
+                              opacity: 1,
+                              borderRadius: 10,
+                              p: 1,
+                              minWidth: "auto",
+                            }}
+                            onClick={handleBack}
+                            disabled={activeStep === 0}
+                          >
+                            <AiOutlineLeft />
+                          </Button>
+                        }
+                      />
+                    </Box>
+                  </Box>
+                </PropertyInfoImages>
+                <PropertyInfoDescriptionDetails>
+                  <div className="property-description">
+                    {property.description}
+                  </div>
+                </PropertyInfoDescriptionDetails>
               </div>
-              <div className="property-info__owner__contact">
-                <h3>Contact</h3>
-              </div>
-            </div>
-          ) : (
-            <div className="property-info__owner">
-              Para mostrar as informações do proprietário, faça login.
-            </div>
-          )}
-        </PropertyInfoOwnerContact>
-      </PropertyInfoContent>
-      <CommentSection />
+              <PropertyInfoOwnerContact>
+                {showPropertyInfo ? (
+                  <div className="property-info__owner">
+                    <div className="property-info__owner__name">
+                      <h3>{userInfo.name}</h3>
+                    </div>
+                    <div className="property-info__owner__contact">
+                      <h3>Contact</h3>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="property-info__owner">
+                    Para mostrar as informações do proprietário, faça login.
+                  </div>
+                )}
+              </PropertyInfoOwnerContact>
+            </PropertyInfoContent>
+            {
+              Object.keys(property).length > 0 && (
+                <CommentSection propertyId={property?.id}/>
+              )
+            }
+          </>
+        )
+      }
     </PropertyInfoWrapper>
   );
 }

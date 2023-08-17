@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -7,55 +7,55 @@ import Container from "@mui/material/Container";
 // react icons
 import {
   MdOutlineApartment,
-  MdHouseSiding,
-  MdOutlineWater,
-  MdCabin,
+  MdFilterAltOff
 } from "react-icons/md";
-import { BsSnow } from "react-icons/bs";
 import { BiHomeAlt } from "react-icons/bi";
 import {
-  GiKidSlide,
-  GiSpaceNeedle,
-  GiCampingTent,
-  GiLightningDome,
-  GiEvilTree,
-  GiWaveSurfer,
-  GiMountainCave,
-  GiCaveEntrance,
-  GiGolfFlag,
+  GiHouse,
+  GiPersonInBed
 } from "react-icons/gi";
-import { AiOutlineCoffee } from "react-icons/ai";
-import { FaCampground, FaUmbrellaBeach, FaSwimmingPool } from "react-icons/fa";
-import { RiEarthquakeFill } from "react-icons/ri";
-import { FaFilter } from "react-icons/fa";
+import EmployeeForm from "../AdvancedFilters";
+import CustomizedDialogs from "../Modal";
+import AdvancedFilters from "../AdvancedFilters";
 const locationsTab = [
-  { id: 1, label: "Design", icon: <MdOutlineApartment size={24} /> },
-  { id: 2, label: "Arctic", icon: <BsSnow size={24} /> },
-  { id: 3, label: "Shared Homes", icon: <MdHouseSiding size={24} /> },
-  { id: 4, label: "LakeFront", icon: <MdOutlineWater size={24} /> },
-  { id: 5, label: "National Parks", icon: <GiKidSlide size={24} /> },
-  { id: 6, label: "Bed & Breakfast ", icon: <AiOutlineCoffee size={24} /> },
-  { id: 7, label: "OMG!", icon: <GiSpaceNeedle size={24} /> },
-  { id: 8, label: "Camping", icon: <FaCampground size={24} /> },
-  { id: 9, label: "A-frames", icon: <GiCampingTent size={24} /> },
-  { id: 10, label: "Domes", icon: <GiLightningDome size={24} /> },
-  { id: 11, label: "Tiny Homes", icon: <BiHomeAlt size={24} /> },
-  { id: 12, label: "Treehouses", icon: <GiEvilTree size={24} /> },
-  { id: 13, label: "Surfing", icon: <GiWaveSurfer size={24} /> },
-  { id: 14, label: "CountrySide", icon: <GiMountainCave size={24} /> },
-  { id: 15, label: "Caves", icon: <GiCaveEntrance size={24} /> },
-  { id: 16, label: "Golfing", icon: <GiGolfFlag size={24} /> },
-  { id: 17, label: "Cabins", icon: <MdCabin size={24} /> },
-  { id: 18, label: "Earth Homes", icon: <RiEarthquakeFill size={24} /> },
-  { id: 19, label: "Tropical", icon: <FaUmbrellaBeach size={24} /> },
-  { id: 20, label: "Amazing Pools", icon: <FaSwimmingPool size={24} /> },
+  { id: 1, label: "Tudo", icon: <MdFilterAltOff size={24} /> },
+  { id: 2, label: "Apartamento", icon: <MdOutlineApartment size={24} /> },
+  { id: 3, label: "Casa", icon: <GiHouse size={24} /> },
+  { id: 4, label: "Hotel", icon: <GiPersonInBed size={24} /> },
+  { id: 5, label: "Pousada", icon: <BiHomeAlt size={24} /> },
 ];
+interface FilterFormData {
+  propertyType: string;
+  minRentPrice: number;
+  maxRentPrice: number;
+  totalOccupancy: number;
+  totalBedrooms: number;
+  totalBathrooms: number;
+  hasWifi: boolean;
+  hasTv: boolean;
+  hasAirConditioning: boolean;
+  hasWashingMachine: boolean;
+  hasKitchen: boolean;
+  hasSuite: boolean;
+  hasParkingSpace: boolean;
+  hasPool: boolean;
+  hasBeachView: boolean;
+  // Adicione mais opções de filtros aqui
+}
 
-const FiltersTab = () => {
-  const [value, setValue] = React.useState(0);
+interface FiltersTabProps {
+  onSelectFilter: (filter: FilterFormData) => void;
+}
 
-  const handleChange = (newValue: number) => {
+const FiltersTab: React.FC<FiltersTabProps> = ({ onSelectFilter }) => {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+  
+  const handleSelectFilter = (filter: FilterFormData) => {
+    onSelectFilter(filter);
   };
 
   return (
@@ -77,12 +77,7 @@ const FiltersTab = () => {
       >
         <Tabs
           value={value}
-          onChange={
-            handleChange as unknown as (
-              event: React.SyntheticEvent,
-              value: number
-            ) => void
-          }
+          onChange={handleChange}
           variant="scrollable"
           scrollButtons
           sx={{
@@ -107,7 +102,13 @@ const FiltersTab = () => {
             color: "theme.palette.text.primary",
           }}
         >
-          <FaFilter /> Filters
+
+        <CustomizedDialogs
+          modalTitle="Filtros Avançados"
+          modalText="Filtros Avançados"
+        >
+        <AdvancedFilters onSelectFilter={handleSelectFilter}  />
+      </CustomizedDialogs>
         </Button>
       </Box>
     </Container>

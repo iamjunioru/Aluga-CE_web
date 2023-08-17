@@ -17,7 +17,6 @@ export function usePersistedState<T>(
   });
 
   useEffect(() => {
-    console.log("useEffect", key, state);
     localStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);
 
