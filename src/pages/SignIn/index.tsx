@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import { UserService } from "../../services/UserService";
 import { toast } from "react-toastify";
+import InputMask from "react-input-mask";
+
 
 export interface Inputs {
   email: string;
@@ -153,7 +155,8 @@ function SignIn() {
                 })}
               />
               {errors.email && <span id="span-error-message">{ValidateEmail(errors.email)}</span>}
-              <input
+              <InputMask
+                mask="(99) 99999-9999"
                 type="text"
                 aria-label="número de telefone"
                 title="número de telefone"
