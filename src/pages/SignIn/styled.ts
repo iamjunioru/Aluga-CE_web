@@ -39,9 +39,10 @@ export const Form = styled.form`
   padding: 2rem;
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; 
     text-align: center;
     color: var(--text);
+    font-size: 1.75rem;
   }
 
   p.dont-have-account {
@@ -61,11 +62,18 @@ export const Button = styled.button`
   width: 100%;
   max-width: 400px;
   height: var(--input-button-height);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   border-radius: var(--border-radius);
   border: 0;
   background: var(--primary);
   color: var(--white);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.125rem; 
+  font-weight: 600; 
+  transition: background-color 0.2s, filter 0.2s;
+
+  &:hover {
+    background-color: var(--secondary);
+    filter: brightness(1.1); 
+  }
+};
 `;
