@@ -55,8 +55,8 @@ const CarouselCard = ({ house, navigatorPath }: HouseCardProps) => {
                     onClick={() => {
                       navigate(navigatorPath);
                     }}
-                    src={image.url}
-                    alt={image.url}
+                    src={image.path}
+                    alt={image.path}
                   ></Box>
                 </div>
               );

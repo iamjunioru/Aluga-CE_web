@@ -40,8 +40,11 @@ export const PropertyInfoContent = styled.div`
     }
 
     .property-Images {
+      min-height: 560px;
       height: 560px;
-      width: 100%;
+      max-height: 560px;
+      min-width: 100%;
+      max-width: 100%;
       background-color: red;
     }
   }
@@ -100,7 +103,11 @@ export const PropertyInfoHeader = styled.div`
 `;
 
 export const PropertyInfoImages = styled.div`
-  width: 100%;
+  min-height: 560px;
+  height: 560px;
+  max-height: 560px;
+  min-width: 100%;
+  max-width: 100%;
   position: relative;
 
   .image-swipper {

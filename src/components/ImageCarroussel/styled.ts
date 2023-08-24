@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ImageCarouselWrapper = styled.div`
   color: var(--text);
   min-width: 270px;
+  min-height: 350px;
   width: 100%;
 
   .house-card_info {

@@ -23,7 +23,10 @@ export interface Property {
   user_Id: string;
   images: Array<{
     id: string;
-    url: string;
+    path: string;
+    property_id: string;
+    createdAt: Date;
+    updatedAt: Date;
   }>;
   createdAt: Date;
   updatedAt: Date;
