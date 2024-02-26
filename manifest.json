@@ -1,35 +1,35 @@
 {
-   "background_color":"#ffffff",
-   "dir":"ltr",
-   "start_url":"/",
-   "display":"standalone",
-   "name":"Aluga-CE PWA",
-   "orientation":"any",
-   "scope":"/",
-   "short_name":"Aluga-CE",
-   "theme_color":"#3a9aa5",
-   "icons":[
-      {
-         "src":"https://www.pwabuilder.com/assets/icons/icon_512.png",
-         "sizes":"512x512",
-         "type":"image/png",
-         "purpose":"maskable"
-      },
-      {
-         "src":"https://www.pwabuilder.com/assets/icons/icon_192.png",
-         "sizes":"192x192",
-         "type":"image/png",
-         "purpose":"any"
-      }
+   "background_color": "#ffffff",
+   "dir": "ltr",
+   "start_url": "https://alugace.netlify.app/",
+   "display": "standalone",
+   "name": "Aluga-CE PWA",
+   "orientation": "any",
+   "scope": "/",
+   "short_name": "Aluga-CE",
+   "theme_color": "#3a9aa5",
+   "icons": [
+     {
+       "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-512.maskable.png",
+       "sizes": "512x512",
+       "type": "image/png",
+       "purpose": "maskable"
+     },
+     {
+       "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-192.maskable.png",
+       "sizes": "192x192",
+       "type": "image/png",
+       "purpose": "any"
+     }
    ],
-   "screenshots":[
-      {
-         "src":"https://www.pwabuilder.com/assets/screenshots/screen1.png",
-         "sizes":"2880x1800",
-         "type":"image/png",
-         "description":"A screenshot of the home page"
-      }
+   "screenshots": [
+     {
+       "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/screenshots/1280x800-screenshot.png",
+       "sizes": "1280x800",
+       "type": "image/png",
+       "description": "A screenshot of the home page"
+     }
    ],
-   "id":"alugace",
-   "description":"pwa."
-}
+   "id": "alugace",
+   "description": "pwa."
+ }
