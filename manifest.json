@@ -11,13 +11,13 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "manifest-icon-192.maskable.png",
+      "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/icon-192-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "manifest-icon-512.maskable.png",
+      "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/icon-512-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
