@@ -9,6 +9,10 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if (typeof navigation.serviceWorker !== 'undefined') {
+        navigation.serviceWorker.register('/pwabuilder-sw.js');
+      }
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
