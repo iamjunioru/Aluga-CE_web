@@ -1,21 +1,14 @@
 {
-  "name": "Aluga-CE",
-  "short_name": "Aluga-CE",
-  "start_url": "https://alugace.netlify.app",
-  "display": "standalone",
-  "description": "Um site de locação de imóveis",
-  "lang": "pt",
+  "background_color": "#ffffff",
   "dir": "auto",
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "display": "standalone",
+  "name": "Aluga-CE",
   "orientation": "any",
+  "scope": "/",
+  "short_name": "Aluga-CE",
+  "start_url": "https://alugace.netlify.app/",
+  "theme_color": "#3ea5b4",
   "icons": [
-    {
-      "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/icon-192-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
     {
       "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/icon-512-512.png",
       "sizes": "512x512",
@@ -23,11 +16,7 @@
       "purpose": "any maskable"
     }
   ],
-  "prefer_related_applications": false,
-  "shortcuts": [
-    {
-      "name": "Aluga-CE",
-      "description": "Locação de imoveis."
-    }
-  ]
+  "id": "1",
+  "description": "pwa.",
+  "lang": "pt"
 }
