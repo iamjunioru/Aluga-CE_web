@@ -1,12 +1,12 @@
 {
     "background_color": "#ffffff",
     "dir": "ltr",
+    "start_url": "/service-worker.js",
     "display": "standalone",
     "name": "Aluga-CE PWA",
     "orientation": "any",
     "scope": "/",
     "short_name": "Aluga-CE",
-    "start_url": "/",
     "theme_color": "#3a9aa5",
     "icons": [
       {
