@@ -10,9 +10,16 @@
   "theme_color": "#3fa1b8",
   "icons": [
     {
-      "src": "/vite.svg",
-      "type": "image/svg+xml"
+      "src": "/icon-192x192.png", // Replace with your icon file
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512x512.png", // Replace with your icon file
+      "type": "image/png",
+      "sizes": "512x512"
     }
+  ]
   ],
   "id": "1",
   "description": "pwa",

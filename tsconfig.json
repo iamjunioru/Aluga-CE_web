@@ -19,7 +19,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "public/pwabuilder-sw.js"],
+  "include": ["src", "pwabuilder-sw.js"],
   "files": ["src/styles/styled.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
