@@ -1,7 +1,7 @@
 {
     "background_color": "#ffffff",
     "dir": "ltr",
-    "start_url": "/service-worker.js",
+    "start_url": "/",
     "display": "standalone",
     "name": "Aluga-CE PWA",
     "orientation": "any",
