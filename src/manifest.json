@@ -1,0 +1,25 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "alugace.netlify",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "alugace.netlify",
+  "start_url": "https://alugace.netlify.app",
+  "theme_color": "#3fa1b8",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml"
+    }
+  ],
+  "id": "1",
+  "description": "pwa",
+  "lang": "pt",
+  "prefer_related_applications": true,
+  "categories": [
+    "travel",
+    "utilities"
+  ]
+}
