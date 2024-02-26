@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="manifest.json" href="/manifest.json" />
+    <link rel="manifest.json" href="src/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aluga-CE</title>
   </head>
@@ -11,7 +11,7 @@
     <div id="root"></div>
     <script>
       if (typeof navigation.serviceWorker !== 'undefined') {
-        navigation.serviceWorker.register('/pwabuilder-sw.js');
+        navigation.serviceWorker.register('src/pwabuilder-sw.js');
       }
     </script>
     <script type="module" src="/src/main.tsx"></script>
