@@ -1,21 +1,19 @@
 {
     "background_color": "#ffffff",
-    "dir": "auto",
+    "dir": "ltr",
     "display": "standalone",
-    "name": "Aluga-CE",
+    "name": "Aluga-CE PWA",
     "orientation": "any",
     "scope": "/",
     "short_name": "Aluga-CE",
-    "start_url": "https://alugace.netlify.app/",
-    "theme_color": "#3ea5b4",
+    "start_url": "/",
+    "theme_color": "#3a9aa5",
     "icons": [
-        {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/icon-512-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-        }
+      {
+        "src": "/icon-512-512.svg",
+        "type": "image/svg+xml"
+      }
     ],
-    "id": "1",
-    "description": "pwa.",
-    "lang": "pt"
-}
+    "id": "alugace",
+    "description": "pwa."
+  }
