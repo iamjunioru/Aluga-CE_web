@@ -1,0 +1,19 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Aluga-CE PWA",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Aluga-CE",
+  "start_url": "/",
+  "theme_color": "#579fd8",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml"
+    }
+  ],
+  "description": "apenas um teste de PWA em um site que estou fazendo.",
+  "lang": "pt"
+}
