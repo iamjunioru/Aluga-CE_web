@@ -9,10 +9,26 @@
     "short_name": "Aluga-CE",
     "theme_color": "#3a9aa5",
     "icons": [
-      {
-        "src": "/icon-512-512.png",
-        "type": "image/png"
-      }
+        {
+            "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "https://www.pwabuilder.com/assets/icons/icon_192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "https://www.pwabuilder.com/assets/screenshots/screen1.png",
+            "sizes": "2880x1800",
+            "type": "image/png",
+            "description": "A screenshot of the home page"
+        }
     ],
     "id": "alugace",
     "description": "pwa."
