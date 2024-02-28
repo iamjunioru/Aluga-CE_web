@@ -10,37 +10,38 @@ export default defineConfig({
         enabled: true
       },
       manifest: {
-        "background_color": "#ffffff",
-        "dir": "ltr",
-        "start_url": "/",
-        "display": "standalone",
-        "name": "Aluga-CE PWA",
-        "orientation": "any",
-        "scope": "/",
-        "short_name": "Aluga-CE",
-        "theme_color": "#3a9aa5",
-        "icons": [
-          {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-512.maskable.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-          },
-          {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-192.maskable.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-          }
-        ],
-        "screenshots": [
-          {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/screenshots/1280x800-screenshot.png",
-            "sizes": "1280x800",
-            "type": "image/png"
-          }
-        ],
-        "description": "pwa."
-      }
+          "name": "Aluga-CE",
+          "short_name": "Aluga-CE",
+          "start_url": "/",
+          "display": "fullscreen",
+          "background_color": "#ffffff",
+          "lang": "pt",
+          "scope": "/",
+          "dir": "ltr",
+          "orientation": "any",
+          "theme_color": "#579fd8",
+          "icons": [
+            {
+              "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-512.maskable.png",
+              "sizes": "512x512",
+              "type": "image/png",
+              "purpose": "maskable"
+            },
+            {
+              "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-192.maskable.png",
+              "sizes": "192x192",
+              "type": "image/png",
+              "purpose": "any"
+            }
+          ],
+          "screenshots": [
+            {
+              "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/screenshots/1280x800-screenshot.png",
+              "sizes": "1280x800",
+              "type": "image/png"
+            }
+          ],
+          "description": "pwa."
+        }
   })],
 })
