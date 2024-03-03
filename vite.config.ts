@@ -24,13 +24,13 @@ export default defineConfig({
         "theme_color": "#0096c7",
         "icons": [
           {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/logo-512x512.png",
+            "src": "logo-512x512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
           },
           {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/logo-512x512.png",
+            "src": "logo-512x512.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any"
