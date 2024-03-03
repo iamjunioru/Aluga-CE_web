@@ -22,27 +22,32 @@ export default defineConfig({
         "dir": "ltr",
         "orientation": "natural",
         "theme_color": "#0096c7",
-        "icons": [
-          {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-512.maskable.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-          },
-          {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/manifest-icon-192.maskable.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-          }
-        ],
-        "screenshots": [
-          {
-            "src": "https://raw.githubusercontent.com/iamjunioru/Aluga-CE_web/main/screenshots/1280x800-screenshot.png",
-            "sizes": "1280x800",
-            "type": "image/png"
-          }
-        ],
+          "icons": [
+            {
+              "src": "android/android-launchericon-512-512.png",
+              "sizes": "512x512"
+            },
+            {
+              "src": "android/android-launchericon-192-192.png",
+              "sizes": "192x192"
+            },
+            {
+              "src": "android/android-launchericon-144-144.png",
+              "sizes": "144x144"
+            },
+            {
+              "src": "android/android-launchericon-96-96.png",
+              "sizes": "96x96"
+            },
+            {
+              "src": "android/android-launchericon-72-72.png",
+              "sizes": "72x72"
+            },
+            {
+              "src": "android/android-launchericon-48-48.png",
+              "sizes": "48x48"
+            }
+          ],
         "description": "O Aluga-CE é um aplicativo de locação de imóveis no interior do Ceará, oferecendo uma ampla variedade de opções. Com uma interface intuitiva e recursos de busca avançados, os usuários podem encontrar facilmente o imóvel ideal para suas necessidades."
       }
     })
